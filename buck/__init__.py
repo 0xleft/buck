@@ -21,6 +21,7 @@ def main():
     parser.add_argument('port', type=int)
     args = parser.parse_args()
 
+    # haky
     global path
     path = args.path
 
