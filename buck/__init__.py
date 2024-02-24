@@ -47,12 +47,11 @@ def main():
     else:
         handler = TextHandler
 
-    with socketserver.TCPServer(('', args.port), handler) as httpd:
-        print(f'Serving at http://localhost:{args.port}')
-        try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            httpd.shutdown()
+    server = socketserver.TCPServer(('', args.port), handler)
+    server.allow_reuse_address = True
+
+    print(f'Serving {args.mode} on http://localhost:{args.port}')
+    server.serve_forever()
 
 if __name__ == '__main__':
     main()
